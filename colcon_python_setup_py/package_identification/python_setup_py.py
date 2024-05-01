@@ -7,7 +7,7 @@ with suppress(ImportError):
     # needed before importing distutils
     # to avoid warning introduced in setuptools 49.2.0
     import setuptools
-import distutils.core
+# import distutils.core
 import os
 from pathlib import Path
 import runpy
@@ -100,15 +100,15 @@ def get_setup_arguments(setup_py):
             # replace setup() function of distutils and setuptools
             # in order to capture its arguments
             try:
-                distutils_setup = distutils.core.setup
-                distutils.core.setup = mock_setup
+                # distutils_setup = distutils.core.setup
+                # distutils.core.setup = mock_setup
                 with suppress(NameError):
                     setuptools_setup = setuptools.setup
                     setuptools.setup = mock_setup
                 # evaluate the setup.py file
                 runpy.run_path(str(setup_py))
             finally:
-                distutils.core.setup = distutils_setup
+                # distutils.core.setup = distutils_setup
                 with suppress(NameError):
                     setuptools.setup = setuptools_setup
             # filter out any data which doesn't work with ast.literal_eval
@@ -256,7 +256,7 @@ def _get_setup_information(setup_py, *, env=None):
         # on Arch 'extern' isn't part of the package
         'exec("with suppress(ImportError):'
         '    from packaging.specifiers import SpecifierSet")',
-        'from distutils.core import run_setup',
+        '# from distutils.core import run_setup',
 
         'dist = run_setup('
         "    'setup.py', script_args=('--dry-run',), stop_after='config')",
