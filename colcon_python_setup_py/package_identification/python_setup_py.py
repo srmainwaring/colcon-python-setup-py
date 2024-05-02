@@ -256,7 +256,7 @@ def _get_setup_information(setup_py, *, env=None):
         # on Arch 'extern' isn't part of the package
         'exec("with suppress(ImportError):'
         '    from packaging.specifiers import SpecifierSet")',
-        '# from distutils.core import run_setup',
+        'from distutils.core import run_setup',
 
         'dist = run_setup('
         "    'setup.py', script_args=('--dry-run',), stop_after='config')",
